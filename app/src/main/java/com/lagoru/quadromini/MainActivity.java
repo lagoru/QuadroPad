@@ -12,12 +12,9 @@ import android.content.SharedPreferences;
 public class MainActivity extends Activity {
 
     private SharedPreferences mPreferences;
-    private NetworkingThread mNetworkThread;
+    private NetworkingThread mNetworkThread = null;
     private DualJoystickView mJoystick;
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,32 +86,28 @@ public class MainActivity extends Activity {
     public synchronized void startNetworkingThread() {
         if (mNetworkThread == null) {
             mNetworkThread = new NetworkingThread(getBaseContext());
-            mNetworkThread.start();
         }
+        updateNetworking();
+        mNetworkThread.start();
     }
 
     public synchronized void stopNetworkingThread() {
         if (mNetworkThread != null) {
             mNetworkThread.requestStop();
-            mNetworkThread = null;
         }
+        mNetworkThread = null;
     }
 
     @Override
     protected void onPause() {
-        // End Ethernet communications
+        //suspending networking thread
         stopNetworkingThread();
-
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Update networking settings
-        updateNetworking();
-
         startNetworkingThread();
     }
 }

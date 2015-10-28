@@ -2,10 +2,156 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/main_view"
 android:layout_width="fill_parent"
-android:layout_height="fill_parent" android:background="@drawable/background">
+android:layout_height="fill_parent" android:background="@drawable/background"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:minHeight="100dp"
+		android:layout_weight="80">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+			android:layout_weight="40">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_weight="50">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:text="@string/x_string"
+					android:id="@+id/textView5"
+					android:layout_gravity="center"
+					android:layout_weight="1" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:text="0"
+					android:id="@+id/textView"
+					android:background="#ffffff"
+					android:minWidth="50dp"
+					android:layout_gravity="center" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_weight="50">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:text="@string/y_string"
+					android:id="@+id/textView6"
+					android:layout_gravity="center"
+					android:layout_weight="1" />
+
+				<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/textView2"
+                    android:layout_gravity="center"
+                    android:background="#ffffff"
+                    android:minWidth="50dp" />
+
+			</LinearLayout>
+		</LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+			android:layout_weight="40">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_weight="50">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:text="@string/rotation_string"
+					android:id="@+id/textView7"
+					android:layout_gravity="center"
+					android:layout_weight="1" />
+
+				<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/textView3"
+					android:background="#ffffff"
+                    android:minWidth="50dp"
+					android:layout_gravity="center_vertical" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_weight="50">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:text="@string/height_string"
+					android:id="@+id/textView8"
+					android:layout_gravity="center"
+					android:layout_weight="1" />
+
+				<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/textView4"
+					android:background="#ffffff"
+                    android:autoText="true"
+                    android:minWidth="50dp"
+					android:layout_gravity="center" />
+
+			</LinearLayout>
+		</LinearLayout>
+
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:id="@+id/textView9"
+			android:layout_weight="25"
+			android:nestedScrollingEnabled="false"
+			android:background="#ffffff"
+			android:layout_margin="2dp" />
+	</LinearLayout>
+
 	<com.lagoru.quadromini.DualJoystickView
 	android:id="@+id/dual_joystick_view"
 	android:layout_gravity="center_horizontal"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent" />
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+		android:layout_weight="20" />
+
 </LinearLayout>

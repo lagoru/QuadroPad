@@ -4,4 +4,8 @@
     <string name="action_settings">Settings</string>
     <string name="preferences_name">Preferences</string>
     <string name="quadro_steer_header">quadrosteer</string>
+    <string name="rotation_string">Rotation :</string>
+    <string name="height_string">Height :</string>
+    <string name="y_string">Y :</string>
+    <string name="x_string">X :</string>
 </resources>
