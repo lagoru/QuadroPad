@@ -7,30 +7,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends Activity {
 
     private SharedPreferences mPreferences;
     private NetworkingThread mNetworkThread = null;
-    private DualJoystickView mJoystick;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        mJoystick = (DualJoystickView) findViewById(R.id.dual_joystick_view);
-        mJoystick.setOnJostickMovedListener(_listenerLeft, _listenerRight);
-        mJoystick.setMenuOpenListener(new MenuOpenListener() {
+        JoystickView joystick1 = (JoystickView) findViewById(R.id.joystick_view_1);
+        JoystickView joystick2 = (JoystickView) findViewById(R.id.joystick_view_2);
+        joystick1.setOnJostickMovedListener(_listenerLeft);
+        joystick2.setOnJostickMovedListener(_listenerRight);
+        Button options_button = (Button) findViewById(R.id.options_button);
+        options_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void menuOpened() {
+            public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, PreferenceActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
-
+        final Button power_button = (Button) findViewById(R.id.on_off_button);
+        power_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mNetworkThread.isQuadrocopterRunning()){
+                    mNetworkThread.setQuadrocopterRunning(false);
+                    power_button.setText(R.string.turn_on_string);
+                }else{
+                    mNetworkThread.setQuadrocopterRunning(true);
+                    power_button.setText(R.string.turn_off_string);
+                }
+            }
+        });
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 

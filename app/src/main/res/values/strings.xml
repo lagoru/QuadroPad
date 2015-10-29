@@ -8,4 +8,7 @@
     <string name="height_string">Height :</string>
     <string name="y_string">Y :</string>
     <string name="x_string">X :</string>
+    <string name="turn_on_string">Turn on</string>
+    <string name="turn_off_string">Turn off</string>
+    <string name="quadrocopter_off_string">quadro_off</string>
 </resources>

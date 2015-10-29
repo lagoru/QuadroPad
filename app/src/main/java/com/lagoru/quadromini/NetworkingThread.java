@@ -11,8 +11,10 @@ import java.net.Socket;
 
 class NetworkingThread extends Thread {
     private volatile boolean mRunning = true;
+    private volatile boolean mQuadrocopterRunning = false;
     private Socket mTcpSocket;
     private byte [] mHeader;
+    private byte [] mQuadrocopterOffString;
     private InputStream mInput;
     private OutputStream mOutput;
     private InetAddress mIpAddress;
@@ -86,10 +88,12 @@ class NetworkingThread extends Thread {
         int l_x, l_y, r_x,r_y;
         byte[] write_buf;
         byte[] read_buf = new byte[200];
+        String to_send;
         int read_size = 0;
 
         try {
             mHeader = mContext.getResources().getString(R.string.quadro_steer_header).getBytes("UTF-8");
+            mQuadrocopterOffString = mContext.getResources().getString(R.string.quadrocopter_off_string).getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -112,10 +116,15 @@ class NetworkingThread extends Thread {
                     r_x = 0;
                     r_y = 0;
                 }
-                String to_send = new String(mHeader) + '_' +Integer.toString(l_x)
-                        +'_'+ Integer.toString(l_y)+'_'+ Integer.toString(r_x)+'_'+ Integer.toString(r_y);
+                if(mQuadrocopterRunning){
+                    to_send = new String(mHeader) + '_' +Integer.toString(l_x)
+                            +'_'+ Integer.toString(l_y)+'_'+ Integer.toString(r_x)+'_'+ Integer.toString(r_y);
+                }else{
+                    to_send = new String(mQuadrocopterOffString);
+                }
 
                 try {
+
                     mOutput.write(to_send.getBytes());
                     read_size = mInput.read(read_buf);
                     Thread.sleep(mPacketRate);
@@ -145,5 +154,13 @@ class NetworkingThread extends Thread {
 
     public synchronized void requestStop() {
         mRunning = false;
+    }
+
+    public void setQuadrocopterRunning(boolean mQuadrocopterRunning) {
+        this.mQuadrocopterRunning = mQuadrocopterRunning;
+    }
+
+    public boolean isQuadrocopterRunning() {
+        return mQuadrocopterRunning;
     }
 }
